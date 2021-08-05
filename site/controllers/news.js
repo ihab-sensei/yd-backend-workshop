@@ -1,7 +1,7 @@
 const News = require("../models/news");
 
 exports.postAddNews = async (req, res, next) => {
-  const name = req.user.firstName + " " + req.user.lastName;
+  const name = req.body.name;
   const title = req.body.title;
   const date = req.body.date;
   const description = req.body.description;
