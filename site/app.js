@@ -68,7 +68,7 @@ app.use(userRouter);
 Report.belongsTo(User);
 User.hasMany(Report);
 
-db.sync({ force: true })
+db.sync(/*{ force: true }*/)
   .then(() => {
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`);
