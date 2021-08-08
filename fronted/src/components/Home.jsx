@@ -7,6 +7,7 @@ const Home = (userData) => {
     description: "",
   });
   const [hobbies, setHobbies] = useState(null);
+  const [allReports, setAllReports] = useState([]);
   const handlChange = (e) => {
     setHobby({ ...hobby, [e.target.name]: e.target.value });
   };
@@ -21,7 +22,12 @@ const Home = (userData) => {
       const hobbies = await data.json();
       setHobbies(hobbies);
     };
-    fetchHobbies();
+    const fetchReports = async () => {
+      const data = await fetch("http://localhost:3001/get-report");
+      const reports = await data.json();
+      setAllReports(reports);
+    };
+    fetchReports();
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -98,7 +104,26 @@ const Home = (userData) => {
           </form>
         </div>
       ) : (
-        <h1>Please sign in</h1>
+        <div>
+          <h1>Please sign in</h1>
+          {allReports.length > 0 ? (
+            <div>
+              <h3>Reports</h3>
+              <ul>
+                {allReports.map((n) => (
+                  <div>
+                    <h1>{n.Location}</h1>
+                    <p>{n.description}</p>
+                    <p>{n.date}</p>
+                    <p>Reported by: {n.name}</p>
+                  </div>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <h3>No reports yet</h3>
+          )}
+        </div>
       )}
     </div>
   );

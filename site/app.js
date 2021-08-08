@@ -9,14 +9,15 @@ const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const bodyParser = require("body-parser");
 
 const userRouter = require("./routes/users");
-const hobbyRouter = require("./routes/hobbies");
+const reportRouter = require("./routes/reports");
+
 
 // Database
 const db = require("./util/database");
 const passport = require("passport");
 
 const User = require("./models/user");
-const Hobby = require("./models/hobby");
+const Report = require("./models/report");
 
 const initPassport = require("./util/passport-config");
 initPassport(passport);
@@ -62,13 +63,14 @@ app.use((req, res, next) => {
 //     .catch((err) => console.log(err));
 // });
 
-app.use(hobbyRouter);
+app.use(reportRouter);
 app.use(userRouter);
 
-Hobby.belongsTo(User);
-User.hasMany(Hobby);
 
-db.sync()
+Report.belongsTo(User);
+User.hasMany(Report);
+
+db.sync(/*{ force: true }*/)
   .then(() => {
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`);
