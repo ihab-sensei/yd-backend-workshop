@@ -7,6 +7,7 @@ import Reports from "./components/Reports";
 import News from './components/News'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [userData, setUserData] = useState({}); 
