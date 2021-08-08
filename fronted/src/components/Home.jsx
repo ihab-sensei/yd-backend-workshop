@@ -13,6 +13,7 @@ const Home = (userData) => {
   };
 
   useEffect(() => {
+    console.log(userData)
     const fetchHobbies = async () => {
       const data = await fetch("http://localhost:3001/get-hobby", {
         headers: {
@@ -56,52 +57,8 @@ const Home = (userData) => {
       {userData.firstName ? (
         <div>
           <h1>Welcome {userData.firstName}</h1>
-          {hobbies ? (
-            <div>
-              <h3>Your Hobbies</h3>
-              <ul>
-                {hobbies.map((hobby) => (
-                  <li>{hobby.title}</li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <h3>You have no hobbies yet</h3>
-          )}
-          <h3>Add new hobby</h3>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="firstName">
-                Title
-                <input
-                  type="text"
-                  name="title"
-                  required
-                  value={hobby.title}
-                  onChange={handlChange}
-                />
-              </label>
-              <label htmlFor="imgUrl">
-                Image Url
-                <input
-                  type="text"
-                  name="imgUrl"
-                  value={hobby.imageUrl}
-                  onChange={handlChange}
-                />
-              </label>
-              <label htmlFor="password">
-                Description
-                <input
-                  type="description"
-                  name="description"
-                  value={hobby.description}
-                  onChange={handlChange}
-                />
-              </label>
-            </div>
-            <button type="submit">Submit</button>
-          </form>
+          
+          
         </div>
       ) : (
         <div>

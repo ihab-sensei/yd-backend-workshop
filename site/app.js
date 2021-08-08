@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./routes/users");
 const reportRouter = require("./routes/reports");
 
+const newsRouter = require("./routes/news");
 
 // Database
 const db = require("./util/database");
@@ -18,6 +19,7 @@ const passport = require("passport");
 
 const User = require("./models/user");
 const Report = require("./models/report");
+const News = require("./models/news");
 
 const initPassport = require("./util/passport-config");
 initPassport(passport);
@@ -33,6 +35,8 @@ app.use(passport.initialize());
 app.use(
   session({
     secret: "MySecret",
+    resave: true,
+    saveUninitialized: true,
     store: new SequelizeStore({
       db: db,
     }),
@@ -70,7 +74,10 @@ app.use(userRouter);
 Report.belongsTo(User);
 User.hasMany(Report);
 
-db.sync(/*{ force: true }*/)
+app.use(newsRouter);
+app.use(userRouter);
+
+db.sync()
   .then(() => {
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`);
