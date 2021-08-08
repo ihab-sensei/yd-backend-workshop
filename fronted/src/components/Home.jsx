@@ -8,6 +8,7 @@ const Home = (userData) => {
   });
   const [hobbies, setHobbies] = useState(null);
   const [allReports, setAllReports] = useState([]);
+  const [allNews, setAllNews] = useState([]);
   const handlChange = (e) => {
     setHobby({ ...hobby, [e.target.name]: e.target.value });
   };
@@ -29,6 +30,13 @@ const Home = (userData) => {
       setAllReports(reports);
     };
     fetchReports();
+    const fetchNews = async () => {
+      const data = await fetch("http://localhost:3001/get-news");
+      const news = await data.json();
+      console.log("news", news)
+      setAllNews(news);
+    };
+    fetchNews();
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,6 +62,9 @@ const Home = (userData) => {
   };
   return (
     <div>
+      <div className="jumbatron">
+
+</div>
       {userData.firstName ? (
         <div>
           <h1>Welcome {userData.firstName}</h1>
@@ -63,6 +74,7 @@ const Home = (userData) => {
       ) : (
         <div>
           <h1>Please sign in</h1>
+          
           {allReports.length > 0 ? (
             <div>
               <h3>Reports</h3>
@@ -79,6 +91,26 @@ const Home = (userData) => {
             </div>
           ) : (
             <h3>No reports yet</h3>
+          )}
+
+{allReports.length > 0 ? (
+            <div>
+              <h3>News</h3>
+              <ul>
+                {allNews.map((n) => {
+               
+                return(
+                  
+                  <div>
+                    <h5>{n.title}</h5>
+                    <p>{n.description}</p>
+                    <p>{n.date}</p>
+                  </div>
+                )})}
+              </ul>
+            </div>
+          ) : (
+            <h3>No news yet</h3>
           )}
         </div>
       )}
