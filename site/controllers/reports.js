@@ -16,6 +16,42 @@ exports.postAddReport = (req, res, next) => {
 
     .catch((err) => console.log(err));
 };
+
+exports.getReport =  (req, res, next) => {
+  Reports.findAll().then(reports => {
+    res.json(reports);
+  }).catch(err => console.log(err))
+ //await res.json(reports);
+};
+
+
+// exports.deleteReport = (req, res, next) => {
+//   const id = req.body.id;
+//   console.log(req.body);
+//   Reports.destroy({
+//     where: { id: id }
+//   }).then(num => {
+//     if (num == 1) {
+//       res.send({
+//         message: "Report was deleted successfully!"
+//       });
+//     } else {
+//       res.send({
+//         message: `Cannot delete Report with id=${id}. Maybe Report was not found!`
+//       });
+//     }
+//   }).catch(err => {
+//     res.status(500).send({
+//       message: "Could not delete Report with id=" + id
+//     });
+//   });
+// };
+
+
+
+
+
+
 // exports.getReport = (req, res, next) => {
 //   User.findOne({ where: { id: req.userId } })
 //     .then((user) => user.getReports())
@@ -44,9 +80,4 @@ exports.postAddReport = (req, res, next) => {
 //   }
 // };
 
-exports.getReport =  (req, res, next) => {
-   Reports.findAll().then(reports => {
-     res.json(reports);
-   }).catch(err => console.log(err))
-  //await res.json(reports);
-};
+

@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./routes/users");
 const reportRouter = require("./routes/reports");
 
+
 // Database
 const db = require("./util/database");
 const passport = require("passport");
@@ -64,6 +65,7 @@ app.use((req, res, next) => {
 
 app.use(reportRouter);
 app.use(userRouter);
+
 
 Report.belongsTo(User);
 User.hasMany(Report);
