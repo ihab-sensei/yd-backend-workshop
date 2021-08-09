@@ -5,6 +5,7 @@ import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import Reports from "./components/Reports";
 import News from './components/News'
+import Awareness from './components/Awareness'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,6 +30,9 @@ function App() {
           </Route>
         <Route path="/news">
           <News {...userData} />
+        </Route>
+        <Route path="/awareness">
+          <Awareness {...userData} />
         </Route>
       </Router>
     </div>

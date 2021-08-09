@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 
 const userRouter = require("./routes/users");
 const reportRouter = require("./routes/reports");
+const awarenessRouter = require("./routes/awareness");
 
 const newsRouter = require("./routes/news");
 
@@ -20,6 +21,8 @@ const passport = require("passport");
 const User = require("./models/user");
 const Report = require("./models/report");
 const News = require("./models/news");
+const Awareness = require("./models/awareness");
+
 
 const initPassport = require("./util/passport-config");
 initPassport(passport);
@@ -68,11 +71,14 @@ app.use((req, res, next) => {
 // });
 
 app.use(reportRouter);
+app.use(awarenessRouter);
 app.use(userRouter);
 
 
 Report.belongsTo(User);
 User.hasMany(Report);
+
+
 
 app.use(newsRouter);
 app.use(userRouter);
