@@ -7,6 +7,7 @@ const Home = (userData) => {
     description: "",
   });
   const [hobbies, setHobbies] = useState(null);
+  
   const [allReports, setAllReports] = useState([]);
   const [allNews, setAllNews] = useState([]);
   const handlChange = (e) => {
