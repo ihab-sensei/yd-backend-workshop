@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Nav from "./components/Nav";
+import WebsiteNav from "./components/Nav";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
@@ -15,7 +15,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Route path="/" component={Nav} />
+        <Route path="/" component={WebsiteNav} />
         <Route exact path="/">
           <Home {...userData} />
         </Route>
